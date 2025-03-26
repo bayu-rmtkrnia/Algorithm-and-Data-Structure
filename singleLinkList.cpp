@@ -120,8 +120,32 @@ void display(nodes*& head){
   cout << "[ " << walker -> number << " ] ";
 }
 
-int main(){
+void displayEach(nodes*& head, bool& exit){
+  nodes* walker = head;
+  int choice;
+  cout << "[ " << walker-> number << " ]\n";
+  while(exit == false){
+    cout << "1. Next\n2. Exit\nChoice:";
+    cin >> choice;
+    if(choice == 1){
+      bool keluar;
+      if(walker->next == NULL){
+        cout << "\nNo next number\n";
+        exit == false;
+      }else{
+        walker = walker->next;
+        cout << "[ " << walker-> number << " ]\n ";
+        exit == false;
+      }
+    }else if(choice == 2){
+      
+      exit = true;
+    }
+  }
+};
 
+int main(){
+  bool exit = false;
   nodes* kepala = NULL;
   insertBack(kepala, 1);
   insertBack(kepala, 2);
@@ -132,7 +156,6 @@ int main(){
   insertFront(kepala, -2);
   insertAfterNode(kepala, 2, 25);
   deletionAfternode(kepala, 25);
-  display(kepala);
-  searchNode(kepala, 4);
+  displayEach(kepala, exit);
   return 0;
 }
